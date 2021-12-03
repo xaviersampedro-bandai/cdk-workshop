@@ -34,7 +34,7 @@ namespace CdkWorkshop
             {
                 Title = "Hello Hits",
                 Table = helloWithCounter.Table,
-                SortBy = "hits"
+                SortBy = "-hits"
             });
         }
     }
