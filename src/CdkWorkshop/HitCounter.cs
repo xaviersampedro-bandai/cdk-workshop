@@ -16,7 +16,6 @@ namespace CdkWorkshop
         public Function Handler { get; }
         public Table Table { get; }
 
-
         public HitCounter(Construct scope, string id, HitCounterProps props) : base(scope, id)
         {
             Table = new Table(this, "Hits", new TableProps
