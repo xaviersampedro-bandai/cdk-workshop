@@ -14,10 +14,12 @@ namespace CdkWorkshop
     public class HitCounter : Construct
     {
         public Function Handler { get; }
+        public Table Table { get; }
+
 
         public HitCounter(Construct scope, string id, HitCounterProps props) : base(scope, id)
         {
-            var table = new Table(this, "Hits", new TableProps
+            Table = new Table(this, "Hits", new TableProps
             {
                 PartitionKey = new Attribute
                 {
@@ -25,6 +27,7 @@ namespace CdkWorkshop
                     Type = AttributeType.STRING
                 }
             });
+            
 
             Handler = new Function(this, "HitCounterHandler", new FunctionProps
             {
@@ -34,11 +37,11 @@ namespace CdkWorkshop
                 Environment = new Dictionary<string, string>
                 {
                     ["DOWNSTREAM_FUNCTION_NAME"] = props.Downstream.FunctionName,
-                    ["HITS_TABLE_NAME"] = table.TableName
+                    ["HITS_TABLE_NAME"] = Table.TableName
                 }
             });
             
-            table.GrantReadWriteData(Handler);
+            Table.GrantReadWriteData(Handler);
             props.Downstream.GrantInvoke(Handler);
         }
     }}
