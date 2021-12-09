@@ -19,7 +19,7 @@ namespace CdkWorkshop
             //     Handler = "hello.handler" // file is "hello", function is "handler"
             // });
             
-            IEnumerable<string?> commands = new[]
+            IEnumerable<string> commands = new[]
             {
                 "cd /asset-input",
                 "export DOTNET_CLI_HOME=\"/tmp/DOTNET_CLI_HOME\"",
@@ -46,7 +46,7 @@ namespace CdkWorkshop
                             }
                         }
                     }),
-                    Handler = "Lambda::Lambda.Hello::FunctionHandler"
+                    Handler = "Lambda::Lambda.Hello::FunctionHandler",
                 });
             
             var helloWithCounter = new HitCounter(this, "HelloHitCounter", new HitCounterProps
